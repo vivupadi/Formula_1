@@ -29,7 +29,16 @@ def get_race_details(venue):
     #breakpoint()
     df_cleaned = df_cleaned.sort_values(by = 'position', ascending=True)
     #breakpoint()
-    return df_cleaned[['position', 'Driver', 'driver_number', 'team_colour', 'team_name']]
+    df_cleaned =  df_cleaned[['position', 'Driver', 'driver_number', 'team_colour', 'team_name']]
+    df_styled = df_cleaned.style.apply(
+        lambda row: [
+            f'background-color: #{row["team_colour"]}' if col == 'team_name' else ''
+            for col in df_cleaned.columns
+        ], 
+        axis =1
+    )
+    #df_styled =  df_styled[['position', 'Driver', 'driver_number', 'team_name']]                        
+    return df_styled
 
 def get_venue(place):
     venue = requests.get(f'https://api.openf1.org/v1/sessions?location={place}&session_name=Race&year=2024')
@@ -91,6 +100,6 @@ df_1 = get_race_details(selected_venue)
 
 #breakpoint()
 data_loading_state.text('Loading data...done!')
-st.table(df_1)
+st.write(df_1.to_html(index = False), unsafe_allow_html=True)
 
 weather(venue)
