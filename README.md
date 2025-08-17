@@ -1,6 +1,6 @@
-# Formula 1 Dashboard
+## Formula 1 Dashboard
 
-##🔎 Overview
+# 🔎 Overview
 
 This project demonstrates an ETL workflow using Python and Streamlit, powered by the Open F1 API.
 
@@ -44,4 +44,4 @@ Enhance dashboard with live updating leaderboards and team stats.
 ## ▶️ Run It Locally
 git clone https://github.com/vivupadi/Formula_1.git
 pip install -r requirements.txt
-streamlit run app.py
+streamlit run Formula_1.py
