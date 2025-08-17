@@ -56,10 +56,7 @@ def get_venue(place):
 
 
 #show Tire color, Tire age, pit status
-"""def tires_used(driver, session_key):
-    stint_number in ascending:
-        in each stintget the lap end - lap start
-    return df[start_tire: age, tire_sequence:laps]"""
+
 
 def weather(venue):
     session_key = get_venue(venue)
