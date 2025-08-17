@@ -43,5 +43,7 @@ Enhance dashboard with live updating leaderboards and team stats.
 
 ## ▶️ Run It Locally
 git clone https://github.com/vivupadi/Formula_1.git
+
 pip install -r requirements.txt
+
 streamlit run Formula_1.py
