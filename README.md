@@ -17,6 +17,10 @@ Although currently implemented in a batch mode, this project will be expanded to
 <img width="1901" height="1008" alt="image" src="https://github.com/user-attachments/assets/eab16a2e-2b79-4e12-a6a6-5dff145bffd9" />
 <img width="1900" height="996" alt="image" src="https://github.com/user-attachments/assets/a5dcca38-aa69-4a85-97f7-7c90719ffc2b" />
 
+### Realtime Data Ingestion
+
+Plan: F1 API --> Azure Functions --> Event Hubs --> Databricks (scheduled Jobs) --> Delta Lake --> Dashboard
+
 ## 🛠️ Tech Stack
 
 Python (data extraction + cleaning)
