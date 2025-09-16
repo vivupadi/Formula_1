@@ -4,6 +4,8 @@
 
 This project demonstrates an ETL workflow using Python and Streamlit, powered by the Open F1 API.
 
+### Batch mode Implementation:
+
 Extract: Pull race data from the API (leaders, track temperature, humidity).
 
 Transform: Clean, sort, and structure the data for each race track.
