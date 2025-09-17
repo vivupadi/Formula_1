@@ -25,6 +25,8 @@ Plan: F1 API --> Azure Functions --> Event Hubs --> Databricks (scheduled Jobs) 
 
 Python (data extraction + cleaning)
 
+Databricks(Realtime data Ingestion + storage)
+
 Streamlit (interactive dashboard)
 
 Open F1 API (data source)
