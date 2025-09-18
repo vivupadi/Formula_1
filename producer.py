@@ -40,3 +40,10 @@ try:
     client.loop_forever() # Starts a blocking network loop
 except Exception as e:
     print(f"Connection error: {e}")
+
+
+#Trying in Class format
+"""
+class OpenF1:
+    def __inti__(self, password, api_key):
+        """
