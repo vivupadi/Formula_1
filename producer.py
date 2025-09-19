@@ -44,6 +44,30 @@ except Exception as e:
 
 #Trying in Class format
 """
-class OpenF1:
-    def __inti__(self, password, api_key):
+class Live_OpenF1:
+    def __init__(self, password, api_key):
+        self.mqtt_username = os.getenv("username")
+        self.access_token = os.getenv("password")
+        self.mqtt_broker = "mqtt.openf1.org"
+        self.mqtt_port = 8883
+    
+
+    def explore_driver():
+    
+    def explore_laps():
+    
+
+class Hist_OpenF1:(uses REST API)
+    def __init__(self, password, api_key):
+        self.mqtt_username = os.getenv("username")
+        self.access_token = os.getenv("password")
+        self.mqtt_broker = "mqtt.openf1.org"
+        self.mqtt_port = 8883
+    
+
+    def explore_driver():
+    
+    def explore_laps():
+    
+
         """
