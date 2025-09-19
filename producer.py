@@ -43,7 +43,7 @@ except Exception as e:
 
 
 #Trying in Class format
-"""
+
 class Live_OpenF1:
     def __init__(self, password, api_key):
         self.mqtt_username = os.getenv("username")
@@ -51,17 +51,17 @@ class Live_OpenF1:
         self.mqtt_broker = "mqtt.openf1.org"
         self.mqtt_port = 8883
 
-    def setup(self)
-        client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-        client.username_pw_set(username=self.mqtt_username, password=self.access_token)
-        client.tls_set(cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLS_CLIENT)
+    def setup(self):
+        self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+        self.client.username_pw_set(username=self.mqtt_username, password=self.access_token)
+        self.client.tls_set(cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLS_CLIENT)
 
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
 
         try:
-            client.connect(mqtt_broker, mqtt_port, 60)
-            client.loop_forever() # Starts a blocking network loop
+            self.client.connect(self.mqtt_broker, self.mqtt_port, 60)
+            self.client.loop_forever() # Starts a blocking network loop
         except Exception as e:
             print(f"Connection error: {e}")
 
@@ -78,23 +78,4 @@ class Live_OpenF1:
         print(f"Received message on topic '{msg.topic}': {msg.payload.decode()}")
         data = json.loads(msg.payload.decode())
 
-    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-    client.username_pw_set(username=mqtt_username, password=access_token)
-    client.tls_set(cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLS_CLIENT)
-
-    client.on_connect = on_connect
-    client.on_message = on_message
-
-    try:
-        client.connect(mqtt_broker, mqtt_port, 60)
-        client.loop_forever() # Starts a blocking network loop
-    except Exception as e:
-        print(f"Connection error: {e}")
-
     
-
-    def explore_driver():
-    
-    def explore_laps():
-    
-        """
