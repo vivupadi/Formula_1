@@ -34,15 +34,16 @@ class Hist_OpenF1:                                      #uses REST API
         df_cleaned = df_cleaned.sort_values(by = 'position', ascending=True)
         #breakpoint()
         df_cleaned =  df_cleaned[['position', 'Driver', 'driver_number', 'team_colour', 'team_name']]
-        df_styled = df_cleaned.style.apply(
+        '''df_styled = df_cleaned.style.apply(
             lambda row: [
                 f'background-color: #{row["team_colour"]}' if col == 'team_name' else ''
                 for col in df_cleaned.columns
             ], 
             axis =1
-        )
-        #df_styled =  df_styled[['position', 'Driver', 'driver_number', 'team_name']]                        
-        return df_styled
+        )'''
+        #df_styled =  df_styled[['position', 'Driver', 'driver_number', 'team_name']] 
+                          
+        return df_cleaned
 
     def get_car_speed(self):
         speed_df = pd.DataFrame()
@@ -58,10 +59,9 @@ class Hist_OpenF1:                                      #uses REST API
             breakpoint()
         df_clean = df[['driver_number', 'i1_speed', 'i2_speed', 'st_speed']]
         df_clean.dropna()
-        speed_df_avg = df_clean.groupby('driver_number')['st_speed'].mean()
-        speed_df_max = df_clean.groupby('driver_number')['st_speed'].max()
-        breakpoint()
-        return speed_df_avg, speed_df_max
+        self.speed_df_avg = df_clean.groupby('driver_number')['st_speed'].mean()
+        self.speed_df_max = df_clean.groupby('driver_number')['st_speed'].max()
+        return self.speed_df_avg, self.speed_df_max
 
     def weather(self):
         weather = requests.get(f'{self.url}/weather?session_key={self.session_key}')
