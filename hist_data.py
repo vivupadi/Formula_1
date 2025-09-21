@@ -19,16 +19,16 @@ class Hist_OpenF1:                                      #uses REST API
 
         driver = requests.get(f'{self.url}/drivers?session_key={self.session_key}')
         data_race = driver_position.json()
-        data_driver = driver.json()
+        data_driver = driver.json()  
 
         if isinstance(data_race, dict):
             data_race = [data_race]
     
         df_race = pd.DataFrame(data_race)
-        df_driver = pd.DataFrame(data_driver)
+        self.df_driver = pd.DataFrame(data_driver)   
 
         df_cleaned = df_race.drop_duplicates(subset=['driver_number'], keep= 'last', ignore_index = False)
-        df_cleaned = df_cleaned.merge(df_driver[['driver_number', 'broadcast_name', 'team_colour', 'team_name']], on= 'driver_number', how = 'left')
+        df_cleaned = df_cleaned.merge(self.df_driver[['driver_number', 'broadcast_name', 'team_colour', 'team_name']], on= 'driver_number', how = 'left')
         df_cleaned.rename(columns ={'broadcast_name' : 'Driver'}, inplace = True)
         #breakpoint()
         df_cleaned = df_cleaned.sort_values(by = 'position', ascending=True)
@@ -44,6 +44,24 @@ class Hist_OpenF1:                                      #uses REST API
         #df_styled =  df_styled[['position', 'Driver', 'driver_number', 'team_name']]                        
         return df_styled
 
+    def get_car_speed(self):
+        speed_df = pd.DataFrame()
+        driver_number_list = self.df_driver[['driver_number']]
+        for number in driver_number_list.values:
+            car_speed = requests.get(f'{self.url}/laps?session_key={self.session_key}&driver_number={number[0]}')
+            car_data = car_speed.json()
+            temp = pd.DataFrame(car_data)
+            speed_df = pd.concat([speed_df , temp], axis=0)
+        df = speed_df[['driver_number', 'i1_speed', 'i2_speed', 'is_pit_out_lap','st_speed']]
+        df_clean = df.drop(df[df['is_pit_out_lap'] == True].index)
+        if 'True' in df['is_pit_out_lap'].values:
+            breakpoint()
+        df_clean = df[['driver_number', 'i1_speed', 'i2_speed', 'st_speed']]
+        df_clean.dropna()
+        speed_df_avg = df_clean.groupby('driver_number')['st_speed'].mean()
+        speed_df_max = df_clean.groupby('driver_number')['st_speed'].max()
+        breakpoint()
+        return speed_df_avg, speed_df_max
 
     def weather(self):
         weather = requests.get(f'{self.url}/weather?session_key={self.session_key}')

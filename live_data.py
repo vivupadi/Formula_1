@@ -7,7 +7,7 @@ import json
 
 load_dotenv()
 
-# Assume 'access_token' is a variable holding your obtained token
+"""# Assume 'access_token' is a variable holding your obtained token
 access_token = os.getenv("password")
 mqtt_broker = "mqtt.openf1.org"
 mqtt_port = 8883
@@ -40,12 +40,12 @@ try:
     client.loop_forever() # Starts a blocking network loop
 except Exception as e:
     print(f"Connection error: {e}")
-
+"""
 
 #Trying in Class format
 
 class Live_OpenF1:
-    def __init__(self, password, api_key):
+    def __init__(self):
         self.mqtt_username = os.getenv("username")
         self.access_token = os.getenv("password")
         self.mqtt_broker = "mqtt.openf1.org"
@@ -68,8 +68,8 @@ class Live_OpenF1:
     def on_connect(self, client, userdata, flags, rc, properties=None):
         if rc == 0:
             print("Connected to OpenF1 MQTT broker")
-            client.subscribe("v1/location")
-            client.subscribe("v1/laps")
+            self.client.subscribe("v1/location")
+            self.client.subscribe("v1/laps")
             # client.subscribe("#") # Subscribe to all topics
         else:
             print(f"Failed to connect, return code {rc}")
@@ -78,4 +78,6 @@ class Live_OpenF1:
         print(f"Received message on topic '{msg.topic}': {msg.payload.decode()}")
         data = json.loads(msg.payload.decode())
 
-    
+
+live_data = Live_OpenF1()
+data = live_data.setup()

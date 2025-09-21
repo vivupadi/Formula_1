@@ -40,4 +40,5 @@ data_loading_state.text('Loading data...done!')
 #st.markdown(df_1.render(), unsafe_allow_html = True)
 st.dataframe(df_1)
 
+venue.get_car_speed()
 venue.weather()
