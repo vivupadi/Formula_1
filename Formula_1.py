@@ -31,10 +31,30 @@ df_drivers = venue.get_race_details()
 
 df_speed_avg, df_speed_max = venue.get_car_speed()
 
-#df_1 = pd.concat([df_drivers, df_speed_avg, df_speed_max], axis=0, join='inner', ignore_index=True)
-df_1= df_drivers.merge(df_speed_avg,on='driver_number').merge(df_speed_max,on='driver_number')
-#df_1 = get_race_details(selected_venue)
-df_1.rename(columns={'st_speed_x' : 'Average_speed', 'st_speed_y' : 'Max_speed'})
+# Convert Series to DataFrame before merging
+try:
+    if not df_speed_avg.empty and not df_speed_max.empty:
+        # Convert Series to DataFrame
+        speed_avg_df = df_speed_avg.reset_index()
+        speed_avg_df.columns = ['driver_number', 'Average_speed']
+        
+        speed_max_df = df_speed_max.reset_index()
+        speed_max_df.columns = ['driver_number', 'Max_speed']
+        
+        # Now merge (this will work!)
+        df_1 = df_drivers.merge(speed_avg_df, on='driver_number', how='left')
+        df_1 = df_1.merge(speed_max_df, on='driver_number', how='left')
+        
+    else:
+        # If no speed data, just use race data
+        df_1 = df_drivers
+        st.warning("No speed data available")
+
+except Exception as e:
+    st.error(f"Error merging data: {e}")
+    df_1 = df_drivers  # Fallback to just race data
+
+    
 df_styled = df_1.style.apply(
             lambda row: [
                 f'background-color: #{row["team_colour"]}' if col == 'team_name' else ''
