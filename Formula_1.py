@@ -54,7 +54,7 @@ except Exception as e:
     st.error(f"Error merging data: {e}")
     df_1 = df_drivers  # Fallback to just race data
 
-    
+
 df_styled = df_1.style.apply(
             lambda row: [
                 f'background-color: #{row["team_colour"]}' if col == 'team_name' else ''
@@ -63,7 +63,6 @@ df_styled = df_1.style.apply(
             axis =1
         )
 
-#breakpoint()
 data_loading_state.text('Loading data...done!')
 #st.write(df_1.render(), unsafe_allow_html=True)
 st.dataframe(df_styled)
