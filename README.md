@@ -55,3 +55,9 @@ git clone https://github.com/vivupadi/Formula_1.git
 pip install -r requirements.txt
 
 streamlit run Formula_1.py
+
+<div align="center">
+⭐ Star this repo if you find it helpful!
+  
+Made with ❤️ by Vivek Padayattil
+</div>
