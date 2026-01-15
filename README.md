@@ -1,5 +1,8 @@
 ## Formula 1 Dashboard
 
+A simple dashboard to view driver race position based on the race venue and also shows track temperature and humidity.
+Currently shows only historical data for year 2024.
+
 # 🔎 Overview
 
 This project demonstrates an ETL workflow using Python and Streamlit, powered by the Open F1 API.
