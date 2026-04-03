@@ -34,6 +34,8 @@ Streamlit (interactive dashboard)
 
 Open F1 API (data source)
 
+MQTT
+
 ## 📊 Features
 
 Dropdown selection of track (2024 races).
@@ -48,7 +50,7 @@ Implement scheduling for automated daily ingestion.
 
 Build a real-time ETL version using Kafka/Spark/Flink.
 
-Add database support (Postgres/DuckDB).
+Add database support (InfluxDB).
 
 Enhance dashboard with live updating leaderboards and team stats.
 
